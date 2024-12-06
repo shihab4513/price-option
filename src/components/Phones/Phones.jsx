@@ -3,9 +3,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { Audio, BallTriangle, Grid } from 'react-loader-spinner';
 
 const Phones = () => {
 const [phones,setPhones]=useState([]);
+const [loading,setLoading]=useState(true);
 useEffect(()=>{
     // fetch('https://openapi.programming-hero.com/api/phones?search=iphone')
     // .then(res=>res.json())
@@ -24,10 +26,30 @@ useEffect(()=>{
         })
         // console.log(phoneWithFakeData);
         setPhones(phoneWithFakeData);
+        setLoading(false);
     })
 },[])
     return (
     <div>
+        
+             {/* below code means if loading is true then show audio loading */}
+            
+                {
+                    
+                       loading && <div>
+                              <BallTriangle></BallTriangle>
+                              <Audio></Audio><Grid></Grid>
+                       </div> 
+                    
+                    
+                    
+                }
+            
+            
+          
+
+        
+        
         <h2 className='text-5xl'>Phones: {phones.length}</h2>
         <BarChart width={1400} height={400} data={phones}>
           <Bar dataKey="price" fill="#8884d8" />
